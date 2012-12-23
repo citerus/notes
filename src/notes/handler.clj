@@ -11,6 +11,10 @@
 
 (def db-uri "mongodb://drutten:gena@localhost:27017/notes")
 
+;add delete
+;add timestamp
+;add flash on submit
+
 (mg/connect-via-uri! db-uri)
 
 (defn save-note! [note]
