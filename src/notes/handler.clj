@@ -26,26 +26,31 @@
     (println (mc/count "notes"))
     (mc/find-maps "notes")))
 
-(defn front-page [notes] 
+(defn front-page [notes added?] 
   (html [:h1 "Notes!"]
+        (if added? (html "Note added!" [:br]))
         (println "Notes from db: " notes)
         [:table
          [:tr [:th "Subject"] [:th "Note"]]
         (for [note notes]
           [:tr [:td (:heading note)] [:td (:body note)]])]
         (form-to [:post "/"]
+                 "Heading"
+                 [:br]
                  (text-field :heading)
+                 [:br]
+                 "Note"
                  [:br]
                  (text-area :body)
                  [:br]
                  (submit-button "submit"))))
 
 (defroutes app-routes
-  (GET "/" [] (front-page (find-notes)))
+  (GET "/" [] (front-page (find-notes) false))
   (POST "/" [heading body] 
         (do
           (save-note! {:heading heading :body body})
-          (front-page (find-notes))))
+          (front-page (find-notes) true)))
   (route/not-found "Not Found"))
 
 (def app
