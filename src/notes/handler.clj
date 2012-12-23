@@ -7,13 +7,14 @@
   (:require [compojure.handler :as handler]
             [compojure.route :as route]
             [monger.core :as mg]
-            [monger.collection :as mc])
-  (:import [org.joda.time DateTime]
+            [monger.collection :as mc]
+            [monger.joda-time])
+  (:import [org.joda.time DateTime DateTimeZone]
            [org.bson.types ObjectId]))
 
 (def db-uri "mongodb://drutten:gena@localhost:27017/notes")
 
-;add timestamp
+(DateTimeZone/setDefault DateTimeZone/UTC)
 
 (mg/connect-via-uri! db-uri)
 
@@ -29,11 +30,7 @@
 (defn front-page [notes added?] 
   (html [:h1 "Notes!"]
         (if added? (html "Note added!" [:br]))
-        [:table
-         [:tr [:th "Subject"] [:th "Note"] [:th]]
-        (for [note notes]
-          [:tr [:td (:heading note)] [:td (:body note)] [:td (form-to [:delete "/"] (hidden-field :id (:_id note)) (submit-button "Delete"))]])
-         ]
+        
         (form-to [:post "/"]
                  "Heading"
                  [:br]
@@ -43,18 +40,31 @@
                  [:br]
                  (text-area :body)
                  [:br]
-                 (submit-button "submit"))))
+                 (submit-button "submit"))
+
+        [:table
+         [:tr [:th "Subject"] [:th "Note"] [:th "TS"] [:th]]
+         (for [note notes]
+          [:tr 
+           [:td (:heading note)] 
+           [:td (:body note)] 
+           [:td (:ts note)]
+           [:td (form-to [:delete "/"] (hidden-field :id (:_id note)) (submit-button "Delete"))]])]))
+
 
 (defroutes app-routes
   (GET "/" [] (front-page (find-notes) false))
+  
   (POST "/" [heading body] 
         (do
-          (save-note! {:heading heading :body body})
+          (save-note! {:heading heading :body body :ts (DateTime.)})
           (front-page (find-notes) true)))
+  
   (DELETE "/" [id]
          (do
           (delete-note! id)
-          (redirect "/")))
+          (front-page (find-notes) true)))
+  
   (route/not-found "Not Found"))
 
 (def app
