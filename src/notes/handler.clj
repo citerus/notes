@@ -1,39 +1,40 @@
 (ns notes.handler
   (:use [compojure.core]
         [hiccup.core]
-        [hiccup.form])
+        [hiccup.form]
+        [ring.util.response])
   
   (:require [compojure.handler :as handler]
             [compojure.route :as route]
             [monger.core :as mg]
             [monger.collection :as mc])
-  (:import [org.joda.time DateTime]))
+  (:import [org.joda.time DateTime]
+           [org.bson.types ObjectId]))
 
 (def db-uri "mongodb://drutten:gena@localhost:27017/notes")
 
 ;add delete
 ;add timestamp
-;add flash on submit
 
 (mg/connect-via-uri! db-uri)
 
 (defn save-note! [note]
-  (println "note" note)
   (mc/insert "notes" note))
 
 (defn find-notes []
-  (do 
-    (println (mc/count "notes"))
-    (mc/find-maps "notes")))
+    (mc/find-maps "notes"))
+
+(defn delete-note! [id] 
+  (mc/remove-by-id "notes" (ObjectId. id)))
 
 (defn front-page [notes added?] 
   (html [:h1 "Notes!"]
         (if added? (html "Note added!" [:br]))
-        (println "Notes from db: " notes)
         [:table
-         [:tr [:th "Subject"] [:th "Note"]]
+         [:tr [:th "Subject"] [:th "Note"] [:th]]
         (for [note notes]
-          [:tr [:td (:heading note)] [:td (:body note)]])]
+          [:tr [:td (:heading note)] [:td (:body note)] [:td (form-to [:post "/delete"] (hidden-field :id (:_id note)) (submit-button "Delete"))]])
+         ]
         (form-to [:post "/"]
                  "Heading"
                  [:br]
@@ -51,6 +52,10 @@
         (do
           (save-note! {:heading heading :body body})
           (front-page (find-notes) true)))
+  (POST "/delete" [id] 
+        (do
+          (delete-note! id)
+          (redirect "/")))
   (route/not-found "Not Found"))
 
 (def app
