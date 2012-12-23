@@ -13,7 +13,6 @@
 
 (def db-uri "mongodb://drutten:gena@localhost:27017/notes")
 
-;add delete
 ;add timestamp
 
 (mg/connect-via-uri! db-uri)
@@ -33,7 +32,7 @@
         [:table
          [:tr [:th "Subject"] [:th "Note"] [:th]]
         (for [note notes]
-          [:tr [:td (:heading note)] [:td (:body note)] [:td (form-to [:post "/delete"] (hidden-field :id (:_id note)) (submit-button "Delete"))]])
+          [:tr [:td (:heading note)] [:td (:body note)] [:td (form-to [:delete "/"] (hidden-field :id (:_id note)) (submit-button "Delete"))]])
          ]
         (form-to [:post "/"]
                  "Heading"
@@ -52,8 +51,8 @@
         (do
           (save-note! {:heading heading :body body})
           (front-page (find-notes) true)))
-  (POST "/delete" [id] 
-        (do
+  (DELETE "/" [id]
+         (do
           (delete-note! id)
           (redirect "/")))
   (route/not-found "Not Found"))
