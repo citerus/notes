@@ -1,14 +1,47 @@
 (ns notes.handler
-  (:use compojure.core)
+  (:use [compojure.core]
+        [hiccup.core]
+        [hiccup.form])
+  
   (:require [compojure.handler :as handler]
             [compojure.route :as route]
-            [monger.core :as mg]))
+            [monger.core :as mg]
+            [monger.collection :as mc])
+  (:import [org.joda.time DateTime]))
 
-(def db-uri "mongodb://user:secret@127.0.0.1/notes:27017")
+(def db-uri "mongodb://drutten:gena@localhost:27017/notes")
+
 (mg/connect-via-uri! db-uri)
 
+(defn save-note! [note]
+  (println "note" note)
+  (mc/insert "notes" note))
+
+(defn find-notes []
+  (do 
+    (println (mc/count "notes"))
+    (mc/find-maps "notes")))
+
+(defn front-page [notes] 
+  (html [:h1 "Notes!"]
+        (println "Notes from db: " notes)
+        [:table
+         [:tr [:th "Subject"] [:th "Note"]]
+        (for [note notes]
+          [:tr [:td (:heading note)] [:td (:body note)]])]
+        (form-to [:post "/"]
+                 (text-field :heading)
+                 [:br]
+                 (text-area :body)
+                 [:br]
+                 (submit-button "submit"))))
+
 (defroutes app-routes
-  (GET "/" [] "Hello World")
+  (GET "/" [] (front-page (find-notes)))
+  (POST "/" [heading body] 
+        (do
+          (save-note! {:heading heading :body body})
+          (front-page (find-notes))))
   (route/not-found "Not Found"))
 
 (def app
