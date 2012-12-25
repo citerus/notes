@@ -2,6 +2,7 @@
   (:use [compojure.core]
         [hiccup.core]
         [hiccup.form]
+        [hiccup.page]
         [ring.util.response])
   
   (:require [compojure.handler :as handler]
@@ -28,10 +29,15 @@
   (mc/remove-by-id "notes" (ObjectId. id)))
 
 (defn front-page [notes added?] 
-  (html [:h1 "Notes!"]
-        (if added? (html "Note added!" [:br]))
+  (html 
+   (html5
+      [:head [:title "Notes"]
+       (include-css "/notes.css")]
+      [:body
+			[:h1 "Notes!"]
+      (if added? (html "Note added!" [:br]))
         
-        (form-to [:post "/"]
+      (form-to [:post "/"]
                  "Heading"
                  [:br]
                  (text-field :heading)
@@ -41,15 +47,15 @@
                  (text-area :body)
                  [:br]
                  (submit-button "submit"))
-
-        [:table
-         [:tr [:th "Subject"] [:th "Note"] [:th "TS"] [:th]]
-         (for [note notes]
-          [:tr 
+  
+      [:table
+       [:tr [:th "Subject"] [:th "Note"] [:th "TS"] [:th]]
+       (for [note notes]
+         [:tr 
            [:td (:heading note)] 
            [:td (:body note)] 
            [:td (:ts note)]
-           [:td (form-to [:delete "/"] (hidden-field :id (:_id note)) (submit-button "Delete"))]])]))
+           [:td (form-to [:delete "/"] (hidden-field :id (:_id note)) (submit-button "Delete"))]])]])))
 
 
 (defroutes app-routes
