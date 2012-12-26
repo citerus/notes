@@ -35,11 +35,7 @@
       [:head [:title "Notes"]
        (include-css "/css/bootstrap.css")
        (include-css "/css/notes.css")
-       (include-js "/js/bootstrap.js")
-       [:style
-        "body {
-          padding-top: 60px;
-        }"]]
+       (include-js "/js/bootstrap.js")]
     
       [:body
        [:div.navbar.navbar-fixed-top
@@ -55,18 +51,13 @@
        [:div.container
         [:div.row-fluid	
          [:div.span4
-          
-        
       (form-to [:post "/"]
-                 "Heading"
-                 [:br]
+               [:fieldset
+                 [:label "Heading"]
                  (text-field :heading)
-                 [:br]
-                 "Note"
-                 [:br]
-                 (text-area :body)
-                 [:br]
-                 [:button.btn {:type "submit"} "Create Note!"] " " (if added? (html [:i.icon-ok])))]
+                 [:label "Note"]
+                 (text-area {:rows 5} :body)
+                 [:button.btn {:type "submit"} "Create Note!"] " " (if added? [:i.icon-ok])])]
          
          [:div.span8 
           (for [note notes]

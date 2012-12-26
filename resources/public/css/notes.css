@@ -10,3 +10,7 @@ header {
   margin-top: 30px;
   margin-bottom: 30px;
 }
+
+body {
+  padding-top: 60px;
+}
