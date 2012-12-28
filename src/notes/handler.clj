@@ -47,7 +47,7 @@
        [:header
         [:div.container
           [:h1 "Notes!"]
-         [:p.lead [:small " Create and read awesome note, right here!"]]]]
+         [:p.lead [:small " Create and read awesome notes, right here!"]]]]
        
        [:div.container
         [:div.row-fluid	
