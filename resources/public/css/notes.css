@@ -1,5 +1,4 @@
 footer {
-    background-color: #F5F5F5;
     border-top: 1px solid #E5E5E5;
     margin-top: 50px;
     padding: 6px 0px 4px 0px;
@@ -13,4 +12,38 @@ header {
 
 body {
   padding-top: 60px;
+}
+
+button.btn.btn-mini.btn-link {
+	border-style: none;
+}
+
+div.del {
+	margin-top: 20px;	
+}
+
+
+#add-note {
+	background-color: #f4f5f4;
+	padding-top: 10px;
+	padding-bottom: 15px;
+	padding-left: 15px;
+	margin-top: 5px;
+}
+
+div.note {
+	padding-left: 5px;
+}
+
+div.note:hover {
+	background-color: #f4f5f4;
+}
+
+legend {
+  margin-bottom: 10px;
+}
+
+.affix {
+    top: 45px;
+    width: 253px;
 }

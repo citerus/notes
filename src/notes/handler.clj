@@ -35,6 +35,7 @@
       [:head [:title "Notes"]
        (include-css "/css/bootstrap.css")
        (include-css "/css/notes.css")
+       (include-js "/js/jquery-1.8.3.min.js")
        (include-js "/js/bootstrap.js")]
     
       [:body
@@ -51,20 +52,22 @@
        [:div.container
         [:div.row-fluid	
          [:div.span4
+          [:div#add-note.affix-top {:data-spy "affix", :data-offset-top	"180"}
       (form-to [:post "/"]
                [:fieldset
                  [:label "Heading"]
                  (text-field :heading)
                  [:label "Note"]
                  (text-area {:rows 5} :body)
-                 [:button.btn {:type "submit"} "Create Note!"] " " (if added? [:i.icon-ok])])]
+                 [:button.btn {:type "submit"} "Create Note!"] " " (if added? [:i.icon-ok])])]]
          
          [:div.span8 
           (for [note notes]
-            [:div
+            [:div.note
             [:div.row-fluid 
-              [:div.span10 [:h2 [:small (:heading note)]]]
-              [:div.span2 (form-to [:delete "/"] (hidden-field :id (:_id note)) [:button.btn.btn-mini.btn-link {:type "submit"} [:i.icon-remove]])]]
+              [:div.span11 [:legend (:heading note)]]
+              [:div.span1
+               [:div.del (form-to [:delete "/"] (hidden-field :id (:_id note)) [:button.btn.btn-mini.btn-link {:type "submit"} [:i.icon-remove]])]]]	
             [:div (:body note)]
             [:p.text-info [:small (:ts note)]]])]]]]
     
