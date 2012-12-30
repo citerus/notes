@@ -10,6 +10,7 @@
             [compojure.route :as route]
             [monger.core :as mg]
             [monger.collection :as mc]
+            [monger.query :as mq]
             [monger.joda-time])
   (:import [org.joda.time DateTime DateTimeZone]
            [org.bson.types ObjectId]))
@@ -24,7 +25,9 @@
   (mc/insert "notes" note))
 
 (defn find-notes []
-  (mc/find-maps "notes"))
+  (mq/with-collection "notes"
+    (mq/find {})
+    (mq/sort {:ts -1})))
 
 (defn delete-note! [id]
   (mc/remove-by-id "notes" (ObjectId. id)))
@@ -34,9 +37,7 @@
     (html5
       [:head [:title "Notes"]
        (include-css "/css/bootstrap.css")
-       (include-css "/css/notes.css")
-       (include-js "/js/jquery-1.8.3.min.js")
-       (include-js "/js/bootstrap.js")]
+       (include-css "/css/notes.css")]
 
       [:body [:div.navbar.navbar-fixed-top [:div.navbar-inner [:div.container (link-to {:class "brand"} "#" "Notes!")]]]
 
@@ -59,13 +60,15 @@
            [:div.note [:div.row-fluid [:div.span11 [:legend (:heading note)]]
                                       [:div.span1 [:div.del (form-to [:delete "/"] (hidden-field :id (:_id note)) [:button.btn.btn-mini.btn-link {:type "submit"} [:i.icon-remove ]])]]]
                       [:div (:body note)]
-                      [:p.text-info [:small (:ts note)]]])]]]]
+                      [:p.text-info [:small (:ts note)]]])]]]
 
       [:footer
        [:div.container
         [:p.muted.credit "By " (link-to "http://www.citerus.se/" "Citerus") " " [:i.icon-star-empty ]
                                 " Styling support by " (link-to "http://twitter.github.com/bootstrap/index.html" "Bootstrap. ") [:i.icon-star-empty ]
-                                " Icons by " (link-to "http://glyphicons.com/" "Glyphicons")]]])))
+                                " Icons by " (link-to "http://glyphicons.com/" "Glyphicons")]]]
+       (include-js "/js/jquery-1.8.3.min.js")
+       (include-js "/js/bootstrap.js")])))
 
 
 (defroutes app-routes
