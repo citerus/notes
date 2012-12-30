@@ -1,3 +1,12 @@
+img#note {
+    float: left;
+    margin-right: 20px;
+}
+
+div#header-txt {
+    margin-top: 40px
+}
+
 footer {
     border-top: 1px solid #E5E5E5;
     margin-top: 50px;
@@ -6,41 +15,40 @@ footer {
 }
 
 header {
-  margin-top: 30px;
-  margin-bottom: 30px;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 body {
-  padding-top: 60px;
+    padding-top: 60px;
 }
 
 button.btn.btn-mini.btn-link {
-	border-style: none;
+    border-style: none;
 }
 
 div.del {
-	margin-top: 20px;	
+    margin-top: 20px;
 }
 
-
 #add-note {
-	background-color: #f4f5f4;
-	padding-top: 10px;
-	padding-bottom: 15px;
-	padding-left: 15px;
-	margin-top: 5px;
+    background-color: #f4f5f4;
+    padding-top: 10px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    margin-top: 5px;
 }
 
 div.note {
-	padding-left: 5px;
+    padding-left: 5px;
 }
 
 div.note:hover {
-	background-color: #f4f5f4;
+    background-color: #f4f5f4;
 }
 
 legend {
-  margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 .affix {
