@@ -5,7 +5,6 @@
         [hiccup.page]
         [hiccup.element]
         [ring.util.response])
-
   (:require [compojure.handler :as handler]
             [compojure.route :as route]
             [monger.core :as mg]
@@ -57,11 +56,11 @@
                                                        (text-area {:rows 5} :body )
                                                        [:button.btn {:type "submit"} "Create Note!"]])]]
 
-         [:div.span8 (for [note notes]
-           [(if (:added note) :div#added.note :div.note) [:div.row-fluid [:div.span11 [:legend (:heading note)]]
-                                      [:div.span1 [:div.del (form-to [:delete "/"] (hidden-field :id (:_id note)) [:button.btn.btn-mini.btn-link {:type "submit"} [:i.icon-remove ]])]]]
-                      [:div (:body note)]
-                      [:p.text-info [:small (:ts note)]]])]]]
+         [:div.span8 (for [{:keys [_id, heading, body, added? ts]} notes]
+           [(if added? :div#added.note :div.note) [:div.row-fluid [:div.span11 [:legend heading]]
+                                      [:div.span1 [:div.del (form-to [:delete "/"] (hidden-field :id _id) [:button.btn.btn-mini.btn-link {:type "submit"} [:i.icon-remove ]])]]]
+                      [:div body]
+                      [:p.text-info [:small ts]]])]]]
 
       [:footer
        [:div.container
@@ -81,7 +80,7 @@
     (do
       (save-note! {:heading heading :body body :ts (DateTime.)})
       (let [notes (find-notes)]
-        (front-page (cons (assoc (first notes) :added true) (rest notes))))))
+        (front-page (cons (assoc (first notes) :added? true) (rest notes))))))
 
   (DELETE "/" [id]
     (do
