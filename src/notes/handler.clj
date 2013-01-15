@@ -32,12 +32,13 @@
 (defn delete-note! [id]
   (mc/remove-by-id "notes" (ObjectId. id)))
 
-(defn front-page [notes added?]
+(defn front-page [notes]
   (html
     (html5
       [:head [:title "Notes"]
-       (include-css "/css/bootstrap.css")
-       (include-css "/css/notes.css")]
+       (include-css "/css/bootstrap.min.css")
+       (include-css "/css/notes.css")
+       (include-css "/css/jquery-ui-1.9.2.custom.min.css")]
 
       [:body [:div.navbar.navbar-fixed-top [:div.navbar-inner [:div.container (link-to {:class "brand"} "#" "Notes!")]]]
 
@@ -54,10 +55,10 @@
                                                        (text-field :heading )
                                                        [:label "Note"]
                                                        (text-area {:rows 5} :body )
-                                                       [:button.btn {:type "submit"} "Create Note!"] " " (if added? [:i.icon-ok ])])]]
+                                                       [:button.btn {:type "submit"} "Create Note!"]])]]
 
          [:div.span8 (for [note notes]
-           [:div.note [:div.row-fluid [:div.span11 [:legend (:heading note)]]
+           [(if (:added note) :div#added.note :div.note) [:div.row-fluid [:div.span11 [:legend (:heading note)]]
                                       [:div.span1 [:div.del (form-to [:delete "/"] (hidden-field :id (:_id note)) [:button.btn.btn-mini.btn-link {:type "submit"} [:i.icon-remove ]])]]]
                       [:div (:body note)]
                       [:p.text-info [:small (:ts note)]]])]]]
@@ -68,21 +69,24 @@
                                 " Styling support by " (link-to "http://twitter.github.com/bootstrap/index.html" "Bootstrap. ") [:i.icon-star-empty ]
                                 " Icons by " (link-to "http://glyphicons.com/" "Glyphicons")]]]
        (include-js "/js/jquery-1.8.3.min.js")
-       (include-js "/js/bootstrap.js")])))
+       (include-js "/js/jquery-ui-1.9.2.custom.min.js")
+       (include-js "/js/bootstrap.min.js")
+       (include-js "/js/notes.js")])))
 
 
 (defroutes app-routes
-  (GET "/" [] (front-page (find-notes) false))
+  (GET "/" [] (front-page (find-notes)))
 
   (POST "/" [heading body]
     (do
       (save-note! {:heading heading :body body :ts (DateTime.)})
-      (front-page (find-notes) true)))
+      (let [notes (find-notes)]
+        (front-page (cons (assoc (first notes) :added true) (rest notes))))))
 
   (DELETE "/" [id]
     (do
       (delete-note! id)
-      (front-page (find-notes) false)))
+      (front-page (find-notes))))
 
   (route/resources "/")
 
