@@ -7,7 +7,7 @@
                  [joda-time/joda-time "2.1"]
                  [hiccup "1.0.2"]
                  [cheshire "5.0.1"]]
-  :plugins [[lein-ring "0.7.5"]]
+  :plugins [[lein-ring "0.8.2"]]
   :ring {:handler notes.handler/app}
   :profiles
   {:dev {:dependencies [[ring-mock "0.1.3"]]}})
