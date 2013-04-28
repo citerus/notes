@@ -77,28 +77,21 @@
         [:p.muted.credit "By " (link-to "http://www.citerus.se/" "Citerus") " " [:i.icon-star-empty ]
                                 " Styling support by " (link-to "http://twitter.github.com/bootstrap/index.html" "Bootstrap. ") [:i.icon-star-empty ]
                                 " Icons by " (link-to "http://glyphicons.com/" "Glyphicons")]]]
-       (include-js "js/jquery-1.8.3.min.js")
-       (include-js "js/jquery-ui-1.9.2.custom.min.js")
-       (include-js "js/bootstrap.min.js")
-       (include-js "js/notes.js")])))
+       (include-js "js/jquery-1.8.3.min.js", "js/jquery-ui-1.9.2.custom.min.js", "js/bootstrap.min.js", "js/notes.js")])))
 
 
 (defroutes app-routes
   (GET "/" [] (front-page (find-notes)))
-
   (POST "/" [heading body]
     (do
       (save-note! {:heading heading :body body :ts (DateTime.)})
       (let [notes (find-notes)]
         (front-page (cons (assoc (first notes) :added? true) (rest notes))))))
-
   (DELETE "/" [id]
     (do
       (delete-note! id)
       (front-page (find-notes))))
-
   (route/resources "/")
-
   (route/not-found "Not Found"))
 
 (def app
