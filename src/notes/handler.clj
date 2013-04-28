@@ -5,10 +5,10 @@
         [hiccup.page]
         [hiccup.element]
         [ring.util.response]
-        [clojure.data],
-        [clojure.java.io])
+        [clojure.data])
   (:require [compojure.handler :as handler]
             [compojure.route :as route]
+            [clojure.java.io :as io]
             [monger.core :as mg]
             [monger.collection :as mc]
             [monger.query :as mq]
@@ -21,17 +21,14 @@
 
 (def mongo-host "localhost")
 (def mongo-port "27017")
-(def mongo-username "test")
-(def mongo-password "test")
 (def environment-file "/home/dotcloud/environment.json")
 
-(if (.exists (as-file environment-file))
-(
-  (def environment (json/read (reader (file environment-file))))
-  (def mongo-host (val (find environment "DOTCLOUD_MONGO_MONGODB_HOST")))
-  (def mongo-port (val (find environment "DOTCLOUD_MONGO_MONGODB_PORT")))))
+(if (.exists (io/file environment-file))
+  (let [environment (with-open [f (io/reader environment-file)] (json/read f))]
+    (def mongo-host (get environment "DOTCLOUD_MONGO_MONGODB_HOST"))
+    (def mongo-port (get environment "DOTCLOUD_MONGO_MONGODB_PORT"))))
 
-(mg/connect-via-uri! (str "mongodb://" mongo-username ":" mongo-password "@" mongo-host ":" mongo-port "/notes"))
+(mg/connect-via-uri! (str "mongodb://test:test@" mongo-host ":" mongo-port "/notes"))
 
 (defn save-note! [note]
   (mc/insert "notes" note))
