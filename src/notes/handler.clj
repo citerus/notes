@@ -47,9 +47,9 @@
       [:head [:title "Notes"]
        (include-css "css/bootstrap.min.css")
        (include-css "css/notes.css")
-       (include-css "css/jquery-ui-1.9.2.custom.min.css")]
+       (include-css "css/jquery-ui-1.10.2.custom.min.css")]
 
-      [:body [:div.navbar.navbar-fixed-top [:div.navbar-inner [:div.container (link-to {:class "brand"} "#" "Awsome Notes!")]]]
+      [:body [:div.navbar.navbar-fixed-top [:div.navbar-inner [:div.container (link-to {:class "brand"} "#" "Notes!")]]]
 
        [:header
         [:div.container (image {:id "note"} "img/note.png")
@@ -77,7 +77,7 @@
         [:p.muted.credit "By " (link-to "http://www.citerus.se/" "Citerus") " " [:i.icon-star-empty ]
                                 " Styling support by " (link-to "http://twitter.github.com/bootstrap/index.html" "Bootstrap. ") [:i.icon-star-empty ]
                                 " Icons by " (link-to "http://glyphicons.com/" "Glyphicons")]]]
-       (include-js "js/jquery-1.9.1.min.js", "js/jquery-ui-1.9.2.custom.min.js", "js/bootstrap.min.js", "js/notes.js")])))
+       (include-js "js/jquery-1.9.1.min.js", "js/jquery-ui-1.10.2.custom.min.js", "js/bootstrap.min.js", "js/notes.js")])))
 
 
 (defroutes app-routes
