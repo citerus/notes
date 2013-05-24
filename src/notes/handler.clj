@@ -4,9 +4,11 @@
         [hiccup.form]
         [hiccup.page]
         [hiccup.element]
+        [hiccup.util]
         [ring.util.response]
         [clojure.data])
-  (:require [compojure.handler :as handler]
+  (:require [clojure.string :as s]
+            [compojure.handler :as handler]
             [compojure.route :as route]
             [clojure.java.io :as io]
             [monger.core :as mg]
@@ -67,9 +69,9 @@
                                                        [:button.btn {:type "submit"} "Create Note!"]])]]
 
          [:div.span8 (for [{:keys [_id, heading, body, added? ts]} notes]
-           [(if added? :div#added.note :div.note) [:div.row-fluid [:div.span11 [:legend heading]]
+           [(if added? :div#added.note :div.note) [:div.row-fluid [:div.span11 [:legend (escape-html heading)]]
                                       [:div.span1 [:div.del (form-to [:delete "./"] (hidden-field :id _id) [:button.btn.btn-mini.btn-link {:type "submit"} [:i.icon-remove ]])]]]
-                      [:div body]
+                      [:div (s/replace (escape-html body) #"\n" "<br>")]
                       [:p.text-info [:small ts]]])]]]
 
       [:footer
