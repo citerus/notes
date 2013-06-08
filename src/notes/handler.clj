@@ -1,5 +1,6 @@
 (ns notes.handler
-  (:use [compojure.core]
+  (:use [notes.paas]
+        [compojure.core]
         [hiccup.core]
         [hiccup.form]
         [hiccup.page]
@@ -14,23 +15,16 @@
             [monger.core :as mg]
             [monger.collection :as mc]
             [monger.query :as mq]
-            [monger.joda-time]
-            [clojure.data.json :as json])
+            [monger.joda-time])
   (:import [org.joda.time DateTime DateTimeZone]
            [org.bson.types ObjectId]))
 
+(def uid "mongo")
+(def pwd "secret")
+
 (DateTimeZone/setDefault DateTimeZone/UTC)
 
-(def mongo-host "localhost")
-(def mongo-port "27017")
-(def environment-file "/home/dotcloud/environment.json")
-
-(if (.exists (io/file environment-file))
-  (let [environment (with-open [f (io/reader environment-file)] (json/read f))]
-    (def mongo-host (get environment "DOTCLOUD_MONGO_MONGODB_HOST"))
-    (def mongo-port (get environment "DOTCLOUD_MONGO_MONGODB_PORT"))))
-
-(mg/connect-via-uri! (str "mongodb://test:test@" mongo-host ":" mongo-port "/notes"))
+(mg/connect-via-uri! (mongo-connection-uri uid pwd))
 
 (defn save-note! [note]
   (mc/insert "notes" note))
