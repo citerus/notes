@@ -35,7 +35,7 @@ To start a web server for the application, run:
 
 If everything is good, the server should start and your default web browser will launch and open the 
 Notes! application. If something went wrong, you're likely to get a Clojure stacktrace that no mortal 
-can read. Sorry.
+can interpret. Sorry.
 
 ## License
 
