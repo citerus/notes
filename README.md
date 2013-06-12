@@ -27,7 +27,7 @@ on the `notes` database. From the MongoDB shell, run something like (MongoDB 2.4
             })
 ```
 
-See [http://docs.mongodb.org/manual/tutorial/add-user-to-database/][] for futher info.
+See http://docs.mongodb.org/manual/tutorial/add-user-to-database/ for futher info.
 
 To start a web server for the application, run:
 
