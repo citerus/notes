@@ -10,7 +10,7 @@ created with the purpose of showing how to deploy an application on different Pa
 
 ## Prerequisites
 
-To build and run you will need [Leiningen][1] 2.x installed.
+To build and run you will need [Leiningen][1] 2.x and [Java 1.7][2] installed.
 
 To run, you will also need a MongoDB database instance. 
 
@@ -22,7 +22,7 @@ To run, you will also need a MongoDB database instance.
 First, the defaults expects a locally running MongoDB using the default port. 
 
 If you run in auth mode, you'll have to create a user `mongo` with password `secret` 
-on the `notes` database. From the MongoDB shell, after authenticating as  run something like (MongoDB 2.4.x and later):
+on the `notes` database. From the MongoDB shell, run something like (MongoDB 2.4.x and later):
 
 ```
 > use notes
