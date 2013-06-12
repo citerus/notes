@@ -37,6 +37,12 @@ If everything is good, the server should start and your default web browser will
 Notes! application. If something went wrong, you're likely to get a Clojure stacktrace that no mortal 
 can interpret. Sorry.
 
+## Deploying and running on a PaaS
+
+Please have a look at the individual PaaS deployment guides:
+
+OpenShift
+
 ## License
 
 Source code is licensed under [The MIT License (MIT)](http://www.citerus.se/). Copyright © 2013 [Citerus AB](http://www.citerus.se/)
