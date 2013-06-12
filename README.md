@@ -1,21 +1,16 @@
 # Notes!
 
-Notes! Is a simple (but still pretty awesome) web application built using [Clojure][1], [Compojure][2], [MongoDB][3] and [Bootstrap][4]. It was
-created with the purpose of showing how to deploy an application on different PaaS providers.
-
-[1]: http://www.clojure.org
-[2]: https://github.com/weavejester/compojure
-[3]: http://www.mongodb.org
-[4]: http://twitter.github.com/bootstrap/
+Notes! Is a simple (but still pretty awesome) web application built using [Clojure](http://www.clojure.org), 
+[Compojure](https://github.com/weavejester/compojure), [MongoDB](http://www.mongodb.org) and 
+[Bootstrap](http://twitter.github.com/bootstrap/). It was created with the purpose of showing how to deploy an 
+application on different PaaS providers.
 
 ## Prerequisites
 
-To build and run you will need [Leiningen][1] 2.x and [Java 1.7][2] installed.
+To build and run you will need [Leiningen](https://github.com/technomancy/leiningen) 2.x and 
+[Java 1.7](http://java.oracle.com) installed.
 
 To run, you will also need a MongoDB database instance. 
-
-[1]: https://github.com/technomancy/leiningen
-[2]: http://java.oracle.com
 
 ## Running locally
 
@@ -43,13 +38,9 @@ Notes! application.
 
 ## License
 
-Source code is licensed under [The MIT License (MIT)][1]. Copyright © 2013 [Citerus AB][1]
+Source code is licensed under [The MIT License (MIT)](http://www.citerus.se/). Copyright © 2013 [Citerus AB](http://www.citerus.se/)
 
-jQuery dependencies are licensed under [The MIT License (MIT)][2]
+jQuery dependencies are licensed under [The MIT License (MIT)](http://opensource.org/licenses/MIT)
 
-Bootstrap dependencies are licensed under [Apache License, Version 2.0][3]
+Bootstrap dependencies are licensed under [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0)
 
-
-[1]: http://www.citerus.se/
-[2]: http://opensource.org/licenses/MIT
-[3]: http://www.apache.org/licenses/LICENSE-2.0
