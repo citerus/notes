@@ -3,10 +3,10 @@
    [clojure.java.io :as io]
    [clojure.data.json :as json]))
 
-(defn db-name "/notes")
+(def db-name "notes")
 
 (defn localhost-uri [uid pwd]
-  (str "mongodb://" uid ":" pwd "@localhost:27017" db-name))
+  (str "mongodb://" uid ":" pwd "@localhost:27017/" db-name))
 
 ;-- dotCloud
 
