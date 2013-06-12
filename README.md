@@ -16,7 +16,7 @@ To run, you will also need a MongoDB database instance.
 
 First, the defaults expects a locally running MongoDB using the default port. 
 
-If you run in auth mode, you'll have to create a user `mongo` with password `secret` 
+You are expected to run MongoDB in ```auth``` mode, you'll have to create a user `mongo` with password `secret` 
 on the `notes` database. From the MongoDB shell, run something like (MongoDB 2.4.x and later):
 
 ```
