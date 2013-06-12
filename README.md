@@ -1,7 +1,7 @@
 # Notes!
 
-Notes! Is a simple web application built using [Clojure][1], [Compojure][2], [MongoDB][3] and [Bootstrap][4]. It was
-created with the purpose of having something to use for showing how to deploy stuff onto the dotCloud PaaS.
+Notes! Is a simple (but still pretty awesome) web application built using [Clojure][1], [Compojure][2], [MongoDB][3] and [Bootstrap][4]. It was
+created with the purpose of showing how to deploy an application on different PaaS providers.
 
 [1]: http://www.clojure.org
 [2]: https://github.com/weavejester/compojure
@@ -10,18 +10,36 @@ created with the purpose of having something to use for showing how to deploy st
 
 ## Prerequisites
 
-You will need [Leiningen][1] 2.0.0-preview10 or above installed.
+To build and run you will need [Leiningen][1] 2.x installed.
+
+To run, you will also need a MongoDB database instance. 
 
 [1]: https://github.com/technomancy/leiningen
 [2]: http://java.oracle.com
 
-## Running
+## Running locally
 
-First, make sure the connection string in handler.clj points to a valid MongoDB instance.
+First, the defaults expects a locally running MongoDB using the default port. 
+
+If you run in auth mode, you'll have to create a user `mongo` with password `secret` 
+on the `notes` database. From the MongoDB shell, after authenticating as  run something like (MongoDB 2.4.x and later):
+
+```
+> use notes
+> db.addUser({ user: "mongo",
+              pwd: "secret",
+              roles: [ "readWrite" ]
+            })
+```
+
+See [http://docs.mongodb.org/manual/tutorial/add-user-to-database/][] for futher info.
 
 To start a web server for the application, run:
 
-    lein ring server
+```lein ring server```
+
+If everything is good, the server should start and your default web browser will launch and open the 
+Notes! application.
 
 ## License
 
