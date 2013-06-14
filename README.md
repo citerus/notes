@@ -29,7 +29,7 @@ on the `notes` database. From the MongoDB shell, run something like (MongoDB 2.4
 
 See http://docs.mongodb.org/manual/tutorial/add-user-to-database/ for futher info.
 
-To start a web server for the application, run:
+To start an embedded web server and deploy the application, run:
 
 ```lein ring server```
 
@@ -42,7 +42,8 @@ can interpret. Sorry.
 Please have a look at the individual PaaS deployment guides:
 
 * [OpenShift](https://github.com/citerus/notes/wiki/OpenShift)
-* dotCloud - coming soon!
+* [dotCloud](https://github.com/citerus/notes/wiki/dotCloud)
+* More PaaS supported soon!
 
 ## License
 
