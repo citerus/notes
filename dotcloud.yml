@@ -1,5 +1,8 @@
 www:
     type: java
+    config:
+      jetty_version: jetty-8
+      java_version: java-7
 
 mongo:
   type: mongodb
