@@ -42,7 +42,8 @@ can interpret. Sorry.
 Please have a look at the individual PaaS deployment guides:
 
 * [OpenShift](https://github.com/citerus/notes/wiki/OpenShift)
-* dotCloud - coming soon!
+* [dotCloud](https://github.com/citerus/notes/wiki/dotCloud)
+* More PaaS supported soon!
 
 ## License
 
