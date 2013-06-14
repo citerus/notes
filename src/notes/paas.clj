@@ -20,7 +20,7 @@
         env (with-open [f (io/reader env-file)] (json/read f))
         mongo-host (get env "DOTCLOUD_MONGO_MONGODB_HOST")
         mongo-port (get env "DOTCLOUD_MONGO_MONGODB_PORT")]
-    (str "mongodb://" uid ":" pwd "@" mongo-host ":" mongo-port db-name)))
+    (str "mongodb://" uid ":" pwd "@" mongo-host ":" mongo-port "/" db-name)))
 
 ;-- OpenShift
 
