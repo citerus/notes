@@ -92,9 +92,11 @@
   (route/resources "/")
   (route/not-found "Not Found"))
 
-(def app
-  (do (connect-mongo!)
-    (handler/site app-routes)))
+(def app (handler/site app-routes))
+
+(defn init [](connect-mongo!))
 
 (defn -main [port]
-  (jetty/run-jetty app {:port (Integer. port)}))
+  (do
+    (connect-mongo!)
+    (jetty/run-jetty app {:port (Integer. port)})))

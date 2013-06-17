@@ -10,7 +10,8 @@
                  [org.clojure/data.json "0.2.2"]
                  [ring/ring-jetty-adapter "1.1.8"]]
   :plugins [[lein-ring "0.8.5"]]
-  :ring {:handler notes.handler/app}
+  :ring {:handler notes.handler/app
+         :init notes.handler/init}
   :min-lein-version "2.0.0"
   :profiles
   {:dev {:resource-paths ["resources"]
