@@ -25,7 +25,8 @@
 
 (DateTimeZone/setDefault DateTimeZone/UTC)
 
-(mg/connect-via-uri! (mongo-connection-uri uid pwd))
+(defn connect-mongo! []
+  (mg/connect-via-uri! (mongo-connection-uri uid pwd)))
 
 (defn save-note! [note]
   (mc/insert "notes" note))
@@ -92,7 +93,8 @@
   (route/not-found "Not Found"))
 
 (def app
-  (handler/site app-routes))
+  (do (connect-mongo!)
+    (handler/site app-routes)))
 
 (defn -main [port]
   (jetty/run-jetty app {:port (Integer. port)}))
