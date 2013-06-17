@@ -48,7 +48,7 @@
 (defn mongo-connection-uri [uid pwd]
   "Try to figure out runtime environment and resolve associated MongoDB
   connection URI. Defaults to localhost and standard port"
-  (println "System Envs: " (System/getenv)
+  (println "System Envs: " (System/getenv))
   (cond (is-dotcloud?) (dotcloud-uri uid pwd)
         (is-open-shift?) (open-shift-uri uid pwd)
         (is-heroku?) (heroku-uri uid pwd)
