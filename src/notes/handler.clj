@@ -7,7 +7,8 @@
         [hiccup.element]
         [hiccup.util]
         [ring.util.response]
-        [clojure.data])
+        [clojure.data]
+        [clj-time.core :only [now]])
 (:require [clojure.string :as s]
           [compojure.handler :as handler]
           [compojure.route :as route]
@@ -18,7 +19,7 @@
           [monger.joda-time]
           [ring.adapter.jetty :as jetty])
 (:import [org.joda.time DateTime DateTimeZone]
-         [org.bson.types ObjectId]))
+[org.bson.types ObjectId]))
 
 (def uid "mongo")
 (def pwd "secret")
@@ -82,7 +83,7 @@
   (GET "/" [] (front-page (find-notes)))
   (POST "/" [heading body]
         (do
-          (save-note! {:heading heading :body body :ts (DateTime.)})
+          (save-note! {:heading heading :body body :ts (now)})
           (let [notes (find-notes)]
             (front-page (cons (assoc (first notes) :added? true) (rest notes))))))
   (DELETE "/" [id]
