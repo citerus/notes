@@ -54,7 +54,6 @@
         :else (localhost-uri uid pwd)))
 
 ;;Roadmap:
-;Heroku
 ;Jelastic
 ;AWS Beanstalk
 ;CloudFoundry
