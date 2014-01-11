@@ -7,7 +7,6 @@
         [hiccup.element]
         [hiccup.util]
         [ring.util.response]
-        [clojure.data]
         [clj-time.core :only [now]])
 (:require [clojure.string :as s]
           [compojure.handler :as handler]
