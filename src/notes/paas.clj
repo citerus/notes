@@ -34,12 +34,12 @@
 ;-- Jelastic
 
 (defn is-jelastic? []
-  (= "jelastic" (str (System/getenv "environment"))))
+  (= "jelastic" (str (System/getProperty "environment"))))
 
 (defn jelastic-uri [uid pwd]
   "Get Jelastic MongoDB URI. 'uid' and 'pwd' are ignored, defined in
   jelastic environemnt configuration file."
-  (str (System/getenv "mongo_url")))
+  (str (System/getProperty "mongo_url")))
 
 ;-- Heroku
 
