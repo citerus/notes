@@ -44,6 +44,7 @@ Please have a look at the individual PaaS deployment guides:
 * [OpenShift](https://github.com/citerus/notes/wiki/OpenShift)
 * [dotCloud](https://github.com/citerus/notes/wiki/dotCloud)
 * [Heroku](https://github.com/citerus/notes/wiki/Heroku)
+* [Jelastic](https://github.com/citerus/notes/wiki/Jelastic)
 * More PaaS supported soon!
 
 ## License
