@@ -47,6 +47,9 @@ Please have a look at the individual PaaS deployment guides:
 * [Jelastic](https://github.com/citerus/notes/wiki/Jelastic)
 * More PaaS supported soon!
 
+## Presentations
+* [JavaOne 2014 presentation slides](https://s3-eu-west-1.amazonaws.com/cdn.citerus.se/paas/javaone-paas.pdf)
+
 ## License
 
 Source code is licensed under [The MIT License (MIT)](http://www.citerus.se/). Copyright © 2013 [Citerus AB](http://www.citerus.se/)
