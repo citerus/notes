@@ -48,7 +48,7 @@ Please have a look at the individual PaaS deployment guides:
 * More PaaS supported soon!
 
 ## Presentations
-* [JavaOne 2014 presentation slides](https://s3-eu-west-1.amazonaws.com/cdn.citerus.se/paas/javaone-paas.pdf)
+* [JavaOne 2014 presentation slides](http://citer.us/javaone-paas.pdf)
 
 ## License
 
