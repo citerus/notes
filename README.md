@@ -45,6 +45,7 @@ Please have a look at the individual PaaS deployment guides:
 * [dotCloud](https://github.com/citerus/notes/wiki/dotCloud)
 * [Heroku](https://github.com/citerus/notes/wiki/Heroku)
 * [Jelastic](https://github.com/citerus/notes/wiki/Jelastic)
+* [Bluemix](https://github.com/citerus/notes/wiki/Bluemix)
 * More PaaS supported soon!
 
 ## Presentations
