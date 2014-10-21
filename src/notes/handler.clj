@@ -72,7 +72,7 @@
 
      [:footer
       [:div.container
-       [:p.muted.credit "By " (link-to "http://www.citerus.se/" "Citerus") " " [:i.icon-star-empty ]
+       [:p.muted.credit (if-let [name (node-name)] (str "Node " name)) " " [:i.icon-star-empty ] " By " (link-to "http://www.citerus.se/" "Citerus") " " [:i.icon-star-empty ]
         " Styling support by " (link-to "http://twitter.github.com/bootstrap/index.html" "Bootstrap. ") [:i.icon-star-empty ]
         " Icons by " (link-to "http://glyphicons.com/" "Glyphicons")]]]
      (include-js "js/jquery-1.9.1.min.js", "js/jquery-ui-1.10.2.custom.min.js", "js/bootstrap.min.js", "js/notes.js")])))

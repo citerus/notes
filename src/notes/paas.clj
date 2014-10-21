@@ -31,6 +31,10 @@
   OpenShift provided admin credentials for zero conf deployment."
   (str (System/getenv "OPENSHIFT_MONGODB_DB_URL") db-name))
 
+(defn node-name []
+  "For OpenShift we provide the gear name, for all other services return nil for now"
+  (System/getenv "OPENSHIFT_GEAR_NAME"))
+
 ;-- Jelastic
 
 (defn is-jelastic? []
